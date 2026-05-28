@@ -5,7 +5,7 @@ clear
 while true
 do
     echo "=================================================="
-    echo "       Linux Monitoring Toolkit"
+    echo "       Linux Monitoring Automation Toolkit        "
     echo "=================================================="
 
     echo ""
@@ -14,7 +14,7 @@ do
     echo "3. Monitor CPU Usage"
     echo "4. Backup System Logs"
     echo "5. Cleanup Temporary Logs"
-    echo "6. View Backup Logs "
+    echo "6. View Generated Backup Logs "
     echo "7. Exit"
     echo ""
 
@@ -79,3 +79,4 @@ do
 
 done
 
+echo "System health check completed successfully"
