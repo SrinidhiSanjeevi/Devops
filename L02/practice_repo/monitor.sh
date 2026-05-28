@@ -63,8 +63,8 @@ do
 
         7)
             echo ""
-            echo "Exiting Linux Monitoring Toolkit..."
-            echo "Thank you for using the toolkit."
+            echo "Exiting Monitoring  Toolkit."
+         
             exit 0
             ;;
 
