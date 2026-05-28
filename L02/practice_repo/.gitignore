@@ -1,0 +1,9 @@
+# Ignore logs
+logs/
+
+# Ignore backup archives
+*.tar.gz
+
+# Ignore temporary files
+*.tmp
+*.swp
