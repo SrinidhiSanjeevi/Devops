@@ -5,7 +5,7 @@ clear
 while true
 do
     echo "=================================================="
-echo "Linux Monitoring Toolkit"
+echo "Enterprise Linux Monitoring Toolkit v2"
     echo "=================================================="
 
     echo ""
