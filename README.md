@@ -1,17 +1,18 @@
-# Devops
+# DevOps
 
-#L01 - Linux Basics
-Linux commands practice
-File and directory operations
-Shell scripting basics
+## L01 - Linux Basics
+- Linux commands practice
+- File and directory operations
+- Shell scripting basics
 
-#L02 - Git & GitHub Workflow
-Git repository setup
-Branch creation and management
-Pull Request workflow
-Merge conflict creation and resolution
+## L02 - Git & GitHub Workflow
+- Git repository setup
+- Branch creation and management
+- Pull Request workflow
+- Merge conflict creation and resolution
 
-#Tools Used
-Ubuntu Linux
-Git & GitHub
-Bash Shell Scripting
+## Tools Used
+- Ubuntu Linux
+- Git & GitHub
+- Bash
+- Shell Scripting
