@@ -4,8 +4,8 @@ agent any
 environment {
 DOCKER_HUB_USER = "srinidhisanjeevi"
 
-BACKEND_IMAGE = "srinidhisanjeevi/ backend:v1"
-FRONTEND_IMAGE = "srinidhisanjeevi/ frontend:v1"
+BACKEND_IMAGE = "srinidhisanjeevi/backend:v1"
+FRONTEND_IMAGE = "srinidhisanjeevi/frontend:v1"
 
 }
 
