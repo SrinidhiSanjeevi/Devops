@@ -1,8 +1,7 @@
-pipipeline {
+pipeline {
     agent any
 
     stages {
-
         stage('Environment Check') {
             steps {
                 sh 'pwd'
@@ -13,6 +12,5 @@ pipipeline {
                 sh 'git --version'
             }
         }
-
     }
 }
