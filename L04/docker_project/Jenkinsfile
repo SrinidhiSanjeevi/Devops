@@ -1,7 +1,6 @@
 pipeline {
 agent any
 
-```
 environment {
     BACKEND_IMAGE = "auth-backend:v1"
     FRONTEND_IMAGE = "auth-frontend:v1"
@@ -73,6 +72,5 @@ post {
         echo 'Pipeline execution finished'
     }
 }
-```
 
 }
