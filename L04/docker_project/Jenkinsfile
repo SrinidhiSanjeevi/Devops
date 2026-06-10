@@ -2,75 +2,109 @@ pipeline {
 agent any
 
 environment {
-    BACKEND_IMAGE = "auth-backend:v1"
-    FRONTEND_IMAGE = "auth-frontend:v1"
+DOCKER_HUB_USER = "srinidhisanjeevi"
+
+BACKEND_IMAGE = "srinidhisanjeevi/auth-backend:v1"
+FRONTEND_IMAGE = "srinidhisanjeevi/auth-frontend:v1"
+
 }
 
 stages {
 
-    stage('Checkout Code') {
-        steps {
-            echo 'Downloading latest source code from GitHub'
-            checkout scm
-        }
+stage('Checkout Code') {
+    steps {
+        echo 'Downloading latest source code from GitHub'
+        checkout scm
     }
+}
 
-    stage('Environment Validation') {
-        steps {
-            sh 'node -v'
-            sh 'npm -v'
-            sh 'docker --version'
-            sh 'git --version'
-        }
+stage('Environment Validation') {
+    steps {
+        sh 'node -v'
+        sh 'npm -v'
+        sh 'docker --version'
+        sh 'git --version'
     }
+}
 
-    stage('Install Backend Dependencies') {
-        steps {
-            dir('L04/docker_project/backend') {
-                sh 'npm install'
-            }
-        }
-    }
-
-    stage('Verify Project Files') {
-        steps {
-            sh 'ls -la L04/docker_project/backend'
-            sh 'ls -la L04/docker_project/frontend'
-        }
-    }
-
-    stage('Build Backend Docker Image') {
-        steps {
-            sh 'docker build -t $BACKEND_IMAGE L04/docker_project/backend'
-        }
-    }
-
-    stage('Build Frontend Docker Image') {
-        steps {
-            sh 'docker build -t $FRONTEND_IMAGE L04/docker_project/frontend'
-        }
-    }
-
-    stage('Verify Docker Images') {
-        steps {
-            sh 'docker images | grep auth'
+stage('Install Backend Dependencies') {
+    steps {
+        dir('L04/docker_project/backend') {
+            sh 'npm install'
         }
     }
 }
 
+stage('Verify Project Files') {
+    steps {
+        sh 'ls -la L04/docker_project/backend'
+        sh 'ls -la L04/docker_project/frontend'
+    }
+}
+
+stage('Build Backend Docker Image') {
+    steps {
+        sh 'docker build -t $BACKEND_IMAGE L04/docker_project/backend'
+    }
+}
+
+stage('Build Frontend Docker Image') {
+    steps {
+        sh 'docker build -t $FRONTEND_IMAGE L04/docker_project/frontend'
+    }
+}
+
+stage('Verify Docker Images') {
+    steps {
+        sh 'docker images | grep srinidhisanjeevi'
+    }
+}
+
+stage('Docker Hub Login') {
+    steps {
+        withCredentials([
+            usernamePassword(
+                credentialsId: 'dockerhub-creds',
+                usernameVariable: 'DOCKER_USER',
+                passwordVariable: 'DOCKER_PASS'
+            )
+        ]) {
+            sh '''
+            echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+            '''
+        }
+    }
+}
+
+stage('Push Backend Image') {
+    steps {
+        sh 'docker push $BACKEND_IMAGE'
+    }
+}
+
+stage('Push Frontend Image') {
+    steps {
+        sh 'docker push $FRONTEND_IMAGE'
+    }
+}
+
+}
+
 post {
 
-    success {
-        echo 'Pipeline completed successfully'
-    }
+success {
+    echo 'Pipeline completed successfully'
+}
 
-    failure {
-        echo 'Pipeline failed'
-    }
+failure {
+    echo 'Pipeline failed'
+}
 
-    always {
-        echo 'Pipeline execution finished'
-    }
+always {
+    sh 'docker logout || true'
+    echo 'Pipeline execution finished'
+}
+
 }
 
 }
