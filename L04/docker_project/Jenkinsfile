@@ -2,10 +2,10 @@ pipeline {
 agent any
 
 environment {
-DOCKER_HUB_USER = "srinidhisanjeevi"
-    BACKEND_IMAGE = "auth-backend:${params.IMAGE_TAG}"
-    FRONTEND_IMAGE = "auth-frontend:${params.IMAGE_TAG}"
+    DOCKER_HUB_USER = "srinidhisanjeevi"
 
+    BACKEND_IMAGE = "${DOCKER_HUB_USER}/auth-backend:${params.IMAGE_TAG}"
+    FRONTEND_IMAGE = "${DOCKER_HUB_USER}/auth-frontend:${params.IMAGE_TAG}"
 }
 
 stages {
@@ -84,19 +84,18 @@ stage('Docker Hub Login') {
         }
     }
 }
-
 stage('Push Backend Image') {
     steps {
-        sh 'docker push $BACKEND_IMAGE'
+        sh "docker push ${DOCKER_HUB_USER}/auth-backend:${params.IMAGE_TAG}"
     }
 }
 
 stage('Push Frontend Image') {
     steps {
-        sh 'docker push $FRONTEND_IMAGE'
+        sh "docker push ${DOCKER_HUB_USER}/auth-frontend:${params.IMAGE_TAG}"
     }
 }
-
+    
 }
 
 post {
