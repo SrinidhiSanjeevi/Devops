@@ -59,7 +59,7 @@ stage('Build Backend Docker Image') {
 
 stage('Build Frontend Docker Image') {
     steps {
-       sh 'docker build -t ${DOCKER_HUB_USER}/auth-frontend:${params.IMAGE_TAG} L04/docker_project/frontend'
+        sh "docker build -t ${DOCKER_HUB_USER}/auth-frontend:${params.IMAGE_TAG} L04/docker_project/frontend"
     }
 }
 
