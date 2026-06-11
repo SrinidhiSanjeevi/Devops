@@ -55,25 +55,15 @@ stage('Build Images') {
 
         stage('Backend Build') {
             steps {
-                echo 'Building Backend Image'
-
-                sh """
-                docker build \
-                -t ${DOCKER_HUB_USER}/auth-backend:${params.IMAGE_TAG} \
-                L04/docker_project/backend
-                """
+                sh 'sleep 20'
+                echo 'Backend Complete'
             }
         }
 
         stage('Frontend Build') {
             steps {
-                echo 'Building Frontend Image'
-
-                sh """
-                docker build \
-                -t ${DOCKER_HUB_USER}/auth-frontend:${params.IMAGE_TAG} \
-                L04/docker_project/frontend
-                """
+                sh 'sleep 20'
+                echo 'Frontend Complete'
             }
         }
     }
