@@ -49,20 +49,36 @@ stage('Verify Project Files') {
     }
 }
 
-stage('Build Backend Docker Image') {
-    steps {
-    sh "docker build -t ${DOCKER_HUB_USER}/auth-backend:${params.IMAGE_TAG} L04/docker_project/backend"
+stage('Build Images') {
 
+    parallel {
 
+        stage('Backend Build') {
+            steps {
+                echo 'Building Backend Image'
+
+                sh """
+                docker build \
+                -t ${DOCKER_HUB_USER}/auth-backend:${params.IMAGE_TAG} \
+                L04/docker_project/backend
+                """
+            }
+        }
+
+        stage('Frontend Build') {
+            steps {
+                echo 'Building Frontend Image'
+
+                sh """
+                docker build \
+                -t ${DOCKER_HUB_USER}/auth-frontend:${params.IMAGE_TAG} \
+                L04/docker_project/frontend
+                """
+            }
+        }
     }
 }
-
-stage('Build Frontend Docker Image') {
-    steps {
-        sh "docker build -t ${DOCKER_HUB_USER}/auth-frontend:${params.IMAGE_TAG} L04/docker_project/frontend"
-    }
-}
-
+    
 stage('Verify Docker Images') {
     steps {
         sh 'docker images | grep srinidhisanjeevi'
