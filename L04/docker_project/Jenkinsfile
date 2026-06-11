@@ -3,9 +3,8 @@ agent any
 
 environment {
 DOCKER_HUB_USER = "srinidhisanjeevi"
-
-BACKEND_IMAGE = "srinidhisanjeevi/backend:v1"
-FRONTEND_IMAGE = "srinidhisanjeevi/frontend:v1"
+    BACKEND_IMAGE = "auth-backend:${params.IMAGE_TAG}"
+    FRONTEND_IMAGE = "auth-frontend:${params.IMAGE_TAG}"
 
 }
 
@@ -34,6 +33,14 @@ stage('Install Backend Dependencies') {
         }
     }
 }
+    
+stage('Show Parameters') {
+    steps {
+        echo "Selected Tag: ${params.IMAGE_TAG}"
+    }
+}
+
+
 
 stage('Verify Project Files') {
     steps {
