@@ -3,6 +3,7 @@ version: "3.9"
 networks:
   homeease-net:
     driver: bridge
+version: "3.9"
 
 services:
 
@@ -10,18 +11,19 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+
     container_name: homeease-backend
     image: homeease-backend:latest
 
-    environment:
-      - backend/.env
+    env_file:
+      - ./backend/.env
 
     ports:
       - "5000:5000"
 
     networks:
       - homeease-net
-
+      
     restart: unless-stopped
 
     healthcheck:
